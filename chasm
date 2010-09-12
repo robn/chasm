@@ -61,24 +61,15 @@ my $parser = do {
             )
 
         <rule: data_byte>
-            (?: <data_decimal_number> 
-              | <data_hex_number> 
-              | <data_string>
-            )
+            (?: <number> | <string> )
 
         <rule: data_word>
-            (?: <data_decimal_number> 
-              | <data_hex_number> 
-              | <label>
-            )
+            (?: <number> | <label> )
 
-        <rule: data_decimal_number>
-            \d+
+        <rule: number>
+            (?: 0x )? \d+
 
-        <rule: data_hex_number>
-            0x\d+
-
-        <rule: data_string>
+        <rule: string>
             '[^']*'
 
         <rule: op>
