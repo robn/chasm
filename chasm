@@ -1,0 +1,99 @@
+#!/usr/bin/env perl
+
+use 5.012;
+
+use warnings;
+use strict;
+
+use autodie;
+
+use Data::Dumper;
+
+my $parser = do {
+    use Regexp::Grammars;
+
+    qr{
+        <debug: on>
+
+        <line>
+
+        <rule: line>
+            ^
+            (?: <pp_directive>
+              | <directive>
+              | (?: <label> :?)? (?: <data> | <op> )?
+            )? <comment>?
+            $
+
+        <rule: pp_directive>
+            \%
+            (?: <include_pp_directive>
+            )
+
+        <rule: include_pp_directive>
+            include "<filename=([^"]+)>"
+
+        <rule: directive>
+            (?: <bits_directive>
+              | <global_directive>
+              | <extern_directive>
+              | <section_directive>
+            )
+
+        <rule: bits_directive>
+            BITS (?: 16 | 32 | 64 )
+
+        <rule: global_directive>
+            GLOBAL <label>
+
+        <rule: extern_directive>
+            EXTERN <label>
+
+        <rule: section_directive>
+            SECTION \. (?: text | data | bss )
+
+        <rule: label>
+            \w+
+
+        <rule: data>
+            (?: db <[data_byte]> (?: , <[data_byte]> )*
+              | dd <[data_word]> (?: , <[data_word]> )*
+            )
+
+        <rule: data_byte>
+            (?: <data_decimal_number> 
+              | <data_hex_number> 
+              | <data_string>
+            )
+
+        <rule: data_word>
+            (?: <data_decimal_number> 
+              | <data_hex_number> 
+              | <label>
+            )
+
+        <rule: data_decimal_number>
+            \d+
+
+        <rule: data_hex_number>
+            0x\d+
+
+        <rule: data_string>
+            '[^']*'
+
+        <rule: op>
+            <...>
+
+        <rule: comment>
+            ; [^\n]*
+    }x;
+};
+
+while ( my $line = <STDIN> ) {
+    if ( $line =~ $parser ) {
+        print Dumper \%/;
+    }
+    else {
+        die "parse failed at line $.";
+    }
+}
