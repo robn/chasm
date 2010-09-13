@@ -13,7 +13,7 @@ my $parser = do {
     use Regexp::Grammars;
 
     qr{
-        <debug: on>
+        #<debug: on>
 
         <line>
 
@@ -72,17 +72,364 @@ my $parser = do {
         <rule: string>
             '[^']*'
 
-        <rule: op>
-            <...>
-
         <rule: comment>
             ; [^\n]*
+
+        <rule: op>
+            (?: <adc_op>
+              | <add_op>
+              | <and_op>
+              | <call_op>
+              | <cdq_op>
+              | <cli_op>
+              | <cmp_op>
+              | <dec_op>
+              | <div_op>
+              | <fadd_op>
+              | <fcomp_op>
+              | <fcompp_op>
+              | <fdiv_op>
+              | <fdivp_op>
+              | <fild_op>
+              | <fistp_op>
+              | <fld_op>
+              | <fldcw_op>
+              | <fldz_op>
+              | <fmul_op>
+              | <fmulp_op>
+              | <fnstcw_op>
+              | <fnstsw_op>
+              | <fprem_op>
+              | <fstp_op>
+              | <fsub_op>
+              | <fsubr_op>
+              | <idiv_op>
+              | <imul_op>
+              | <inc_op>
+              | <iret_op>
+              | <ja_op>
+              | <jc_op>
+              | <jg_op>
+              | <jge_op>
+              | <jl_op>
+              | <jle_op>
+              | <jmp_op>
+              | <jna_op>
+              | <jnc_op>
+              | <jng_op>
+              | <jnl_op>
+              | <jns_op>
+              | <jnz_op>
+              | <jpe_op>
+              | <js_op>
+              | <jz_op>
+              | <lea_op>
+              | <mov_op>
+              | <movsb_op>
+              | <movsd_op>
+              | <movsw_op>
+              | <movsx_op>
+              | <movzx_op>
+              | <mul_op>
+              | <neg_op>
+              | <nop_op>
+              | <not_op>
+              | <or_op>
+              | <pop_op>
+              | <push_op>
+              | <pushf_op>
+              | <rcl_op>
+              | <rep_op>
+              | <repne_op>
+              | <ret_op>
+              | <sahf_op>
+              | <sar_op>
+              | <sbb_op>
+              | <seta_op>
+              | <setc_op>
+              | <setg_op>
+              | <setl_op>
+              | <setnc_op>
+              | <setng_op>
+              | <setnl_op>
+              | <setnz_op>
+              | <setz_op>
+              | <shl_op>
+              | <shr_op>
+              | <sub_op>
+              | <test_op>
+              | <times_op>
+              | <wait_op>
+              | <xchg_op>
+              | <xor_op>
+            )
+
+        <rule: adc_op>
+            adc <...>
+
+        <rule: add_op>
+            add <...>
+
+        <rule: and_op>
+            and <...>
+
+        <rule: call_op>
+            call <...>
+
+        <rule: cdq_op>
+            cdq <...>
+
+        <rule: cli_op>
+            cli <...>
+
+        <rule: cmp_op>
+            cmp <...>
+
+        <rule: dec_op>
+            dec <...>
+
+        <rule: div_op>
+            div <...>
+
+        <rule: fadd_op>
+            fadd <...>
+
+        <rule: fcomp_op>
+            fcomp <...>
+
+        <rule: fcompp_op>
+            fcompp <...>
+
+        <rule: fdiv_op>
+            fdiv <...>
+
+        <rule: fdivp_op>
+            fdivp <...>
+
+        <rule: fild_op>
+            fild <...>
+
+        <rule: fistp_op>
+            fistp <...>
+
+        <rule: fld_op>
+            fld <...>
+
+        <rule: fldcw_op>
+            fldcw <...>
+
+        <rule: fldz_op>
+            fldz <...>
+
+        <rule: fmul_op>
+            fmul <...>
+
+        <rule: fmulp_op>
+            fmulp <...>
+
+        <rule: fnstcw_op>
+            fnstcw <...>
+
+        <rule: fnstsw_op>
+            fnstsw <...>
+
+        <rule: fprem_op>
+            fprem <...>
+
+        <rule: fstp_op>
+            fstp <...>
+
+        <rule: fsub_op>
+            fsub <...>
+
+        <rule: fsubr_op>
+            fsubr <...>
+
+        <rule: idiv_op>
+            idiv <...>
+
+        <rule: imul_op>
+            imul <...>
+
+        <rule: inc_op>
+            inc <...>
+
+        <rule: iret_op>
+            iret <...>
+
+        <rule: ja_op>
+            ja <...>
+
+        <rule: jc_op>
+            jc <...>
+
+        <rule: jg_op>
+            jg <...>
+
+        <rule: jge_op>
+            jge <...>
+
+        <rule: jl_op>
+            jl <...>
+
+        <rule: jle_op>
+            jle <...>
+
+        <rule: jmp_op>
+            jmp <...>
+
+        <rule: jna_op>
+            jna <...>
+
+        <rule: jnc_op>
+            jnc <...>
+
+        <rule: jng_op>
+            jng <...>
+
+        <rule: jnl_op>
+            jnl <...>
+
+        <rule: jns_op>
+            jns <...>
+
+        <rule: jnz_op>
+            jnz <...>
+
+        <rule: jpe_op>
+            jpe <...>
+
+        <rule: js_op>
+            js <...>
+
+        <rule: jz_op>
+            jz <...>
+
+        <rule: lea_op>
+            lea <...>
+
+        <rule: mov_op>
+            mov <extended_register> , <extended_register>
+
+        <rule: movsb_op>
+            movsb <...>
+
+        <rule: movsd_op>
+            movsd <...>
+
+        <rule: movsw_op>
+            movsw <...>
+
+        <rule: movsx_op>
+            movsx <...>
+
+        <rule: movzx_op>
+            movzx <...>
+
+        <rule: mul_op>
+            mul <...>
+
+        <rule: neg_op>
+            neg <...>
+
+        <rule: nop_op>
+            nop <...>
+
+        <rule: not_op>
+            not <...>
+
+        <rule: or_op>
+            or <...>
+
+        <rule: pop_op>
+            pop <...>
+
+        <rule: push_op>
+            push (?: <extended_register> )
+
+        <rule: pushf_op>
+            pushf <...>
+
+        <rule: rcl_op>
+            rcl <...>
+
+        <rule: rep_op>
+            rep <...>
+
+        <rule: repne_op>
+            repne <...>
+
+        <rule: ret_op>
+            ret <...>
+
+        <rule: sahf_op>
+            sahf <...>
+
+        <rule: sar_op>
+            sar <...>
+
+        <rule: sbb_op>
+            sbb <...>
+
+        <rule: seta_op>
+            seta <...>
+
+        <rule: setc_op>
+            setc <...>
+
+        <rule: setg_op>
+            setg <...>
+
+        <rule: setl_op>
+            setl <...>
+
+        <rule: setnc_op>
+            setnc <...>
+
+        <rule: setng_op>
+            setng <...>
+
+        <rule: setnl_op>
+            setnl <...>
+
+        <rule: setnz_op>
+            setnz <...>
+
+        <rule: setz_op>
+            setz <...>
+
+        <rule: shl_op>
+            shl <...>
+
+        <rule: shr_op>
+            shr <...>
+
+        <rule: sub_op>
+            sub <...>
+
+        <rule: test_op>
+            test <...>
+
+        <rule: times_op>
+            times <...>
+
+        <rule: wait_op>
+            wait <...>
+
+        <rule: xchg_op>
+            xchg <...>
+
+        <rule: xor_op>
+            xor <...>
+
+        <rule: extended_register>
+            (?: eax | ebx | ecx | edx | ebp | esp )
     }x;
 };
 
 while ( my $line = <STDIN> ) {
     if ( $line =~ $parser ) {
-        print Dumper \%/;
+        #print Dumper \%/;
     }
     else {
         die "parse failed at line $.";
