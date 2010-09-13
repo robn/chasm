@@ -9,6 +9,8 @@ use autodie;
 my @want = qw(386);
 my @nowant = qw(UNDOC PRIV AMD);
 
+my @conds = qw(a ae b be c e g ge l le na nae nb nbe nc ne ng nge nl nle no np ns nz o p pe po s z);
+
 open my $fh, "<", "insns.dat";
 
 my %ops;
@@ -23,7 +25,17 @@ while ( my $line = <$fh> ) {
     next if not %flags ~~ @want;
     next if %flags ~~ @nowant;
 
-    push @{$ops{$op}}, $args;
+    if ( $op =~ m/cc$/ )
+    {
+        for my $cond ( @conds ) {
+            my $cond_op = $op;
+            $cond_op =~ s/cc$/$cond/;
+            push @{$ops{$cond_op}}, $args;
+        }
+    }
+    else {
+        push @{$ops{$op}}, $args;
+    }
 }
 
 for my $op ( sort keys %ops ) {
