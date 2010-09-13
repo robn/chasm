@@ -15,7 +15,7 @@ open my $fh, "<", "insns.dat";
 
 my %ops;
 
-while ( my $line = <$fh> ) {
+while (my $line = <$fh>) {
     next if $line =~ m/^;/ or $line =~ m/^\s*$/;
     chomp $line;
 
@@ -25,9 +25,9 @@ while ( my $line = <$fh> ) {
     next if not %flags ~~ @want;
     next if %flags ~~ @nowant;
 
-    if ( $op =~ m/cc$/ )
+    if ($op =~ m/cc$/)
     {
-        for my $cond ( @conds ) {
+        for my $cond (@conds) {
             my $cond_op = $op;
             $cond_op =~ s/cc$/$cond/;
             push @{$ops{$cond_op}}, $args;
@@ -38,19 +38,21 @@ while ( my $line = <$fh> ) {
     }
 }
 
-for my $op ( sort keys %ops ) {
+for my $op (sort keys %ops) {
     my $lc_op = lc $op;
     say "        <rule: ".$lc_op."_op>";
 
     my @argrules;
 
-    for my $args ( sort @{$ops{$op}} ) {
+    for my $args (sort @{$ops{$op}}) {
         next if $args eq "void";
         my @args = split ',', $args;
+
+        for my $arg (
         push @argrules, '<'.join('> , <', @args).'>';
     }
 
-    given ( scalar @argrules ) {
+    given (scalar @argrules) {
         when (0) {
             say "            $lc_op";
         }
@@ -65,11 +67,4 @@ for my $op ( sort keys %ops ) {
     }
 
     say "";
-
-    #say for @argrules;
-
-    #say "            $op";
 }
-
-#use Data::Dumper;
-#print Dumper \%ops;
