@@ -1,0 +1,63 @@
+#!/usr/bin/env perl
+
+use 5.012;
+
+use warnings;
+use strict;
+use autodie;
+
+my @want = qw(386);
+my @nowant = qw(UNDOC PRIV AMD);
+
+open my $fh, "<", "insns.dat";
+
+my %ops;
+
+while ( my $line = <$fh> ) {
+    next if $line =~ m/^;/ or $line =~ m/^\s*$/;
+    chomp $line;
+
+    my ($op, $args, @rest) = split /\t+/, $line;
+
+    my %flags = map { $_ => 1 } split ',', pop @rest;
+    next if not %flags ~~ @want;
+    next if %flags ~~ @nowant;
+
+    push @{$ops{$op}}, $args;
+}
+
+for my $op ( sort keys %ops ) {
+    my $lc_op = lc $op;
+    say "        <rule: ".$lc_op."_op>";
+
+    my @argrules;
+
+    for my $args ( sort @{$ops{$op}} ) {
+        next if $args eq "void";
+        my @args = split ',', $args;
+        push @argrules, '<'.join('> , <', @args).'>';
+    }
+
+    given ( scalar @argrules ) {
+        when (0) {
+            say "            $lc_op";
+        }
+        when (1) {
+            say "            $lc_op $argrules[0]";
+        }
+        default {
+            print "            $lc_op (?: ";
+            print join "\n"." " x (length ($lc_op) + 15)."| ", @argrules;
+            print "\n            )\n";
+        }
+    }
+
+    say "";
+
+    #say for @argrules;
+
+    #say "            $op";
+}
+
+#use Data::Dumper;
+#print Dumper \%ops;
