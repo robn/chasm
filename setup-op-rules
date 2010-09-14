@@ -38,6 +38,9 @@ while (my $line = <$fh>) {
     }
 }
 
+say "        <rule: op>";
+print "            (?: <".join("_op>\n              | <", map { lc } sort keys %ops)."_op>\n            )\n\n";
+
 for my $op (sort keys %ops) {
     my $lc_op = lc $op;
     say "        <rule: ".$lc_op."_op>";
