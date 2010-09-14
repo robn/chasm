@@ -75,352 +75,1097 @@ my $parser = do {
         <rule: comment>
             ; [^\n]*
 
+
         <rule: op>
             (?: <adc_op>
               | <add_op>
               | <and_op>
+              | <bound_op>
+              | <bsf_op>
+              | <bsr_op>
+              | <bt_op>
+              | <btc_op>
+              | <btr_op>
+              | <bts_op>
               | <call_op>
               | <cdq_op>
-              | <cli_op>
               | <cmp_op>
+              | <cmpsd_op>
+              | <cwde_op>
               | <dec_op>
               | <div_op>
-              | <fadd_op>
-              | <fcomp_op>
-              | <fcompp_op>
-              | <fdiv_op>
-              | <fdivp_op>
-              | <fild_op>
-              | <fistp_op>
-              | <fld_op>
-              | <fldcw_op>
-              | <fldz_op>
-              | <fmul_op>
-              | <fmulp_op>
-              | <fnstcw_op>
-              | <fnstsw_op>
-              | <fprem_op>
-              | <fstp_op>
-              | <fsub_op>
-              | <fsubr_op>
+              | <fcos_op>
+              | <fprem1_op>
+              | <fsin_op>
+              | <fsincos_op>
+              | <fucom_op>
+              | <fucomp_op>
+              | <fucompp_op>
+              | <icebp_op>
               | <idiv_op>
               | <imul_op>
+              | <in_op>
               | <inc_op>
-              | <iret_op>
+              | <insd_op>
+              | <int01_op>
+              | <int1_op>
+              | <iretd_op>
+              | <jecxz_op>
+              | <jmp_op>
               | <ja_op>
+              | <jae_op>
+              | <jb_op>
+              | <jbe_op>
               | <jc_op>
+              | <je_op>
               | <jg_op>
               | <jge_op>
               | <jl_op>
               | <jle_op>
-              | <jmp_op>
               | <jna_op>
+              | <jnae_op>
+              | <jnb_op>
+              | <jnbe_op>
               | <jnc_op>
+              | <jne_op>
               | <jng_op>
+              | <jnge_op>
               | <jnl_op>
+              | <jnle_op>
+              | <jno_op>
+              | <jnp_op>
               | <jns_op>
               | <jnz_op>
+              | <jo_op>
+              | <jp_op>
               | <jpe_op>
+              | <jpo_op>
               | <js_op>
               | <jz_op>
+              | <lar_op>
+              | <lds_op>
               | <lea_op>
+              | <les_op>
+              | <lfs_op>
+              | <lgs_op>
+              | <lodsd_op>
+              | <loop_op>
+              | <loope_op>
+              | <loopne_op>
+              | <loopnz_op>
+              | <loopz_op>
+              | <lsl_op>
+              | <lss_op>
               | <mov_op>
-              | <movsb_op>
               | <movsd_op>
-              | <movsw_op>
               | <movsx_op>
               | <movzx_op>
               | <mul_op>
               | <neg_op>
-              | <nop_op>
               | <not_op>
               | <or_op>
+              | <out_op>
+              | <outsd_op>
               | <pop_op>
+              | <popad_op>
+              | <popfd_op>
               | <push_op>
-              | <pushf_op>
+              | <pushad_op>
+              | <pushfd_op>
               | <rcl_op>
-              | <rep_op>
-              | <repne_op>
-              | <ret_op>
-              | <sahf_op>
+              | <rcr_op>
+              | <rol_op>
+              | <ror_op>
+              | <sal_op>
               | <sar_op>
               | <sbb_op>
+              | <scasd_op>
               | <seta_op>
+              | <setae_op>
+              | <setb_op>
+              | <setbe_op>
               | <setc_op>
+              | <sete_op>
               | <setg_op>
+              | <setge_op>
               | <setl_op>
+              | <setle_op>
+              | <setna_op>
+              | <setnae_op>
+              | <setnb_op>
+              | <setnbe_op>
               | <setnc_op>
+              | <setne_op>
               | <setng_op>
+              | <setnge_op>
               | <setnl_op>
+              | <setnle_op>
+              | <setno_op>
+              | <setnp_op>
+              | <setns_op>
               | <setnz_op>
+              | <seto_op>
+              | <setp_op>
+              | <setpe_op>
+              | <setpo_op>
+              | <sets_op>
               | <setz_op>
               | <shl_op>
+              | <shld_op>
               | <shr_op>
+              | <shrd_op>
+              | <sldt_op>
+              | <smsw_op>
+              | <stosd_op>
+              | <str_op>
               | <sub_op>
               | <test_op>
-              | <times_op>
-              | <wait_op>
               | <xchg_op>
               | <xor_op>
             )
 
         <rule: adc_op>
-            adc <...>
+            adc (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
 
         <rule: add_op>
-            add <...>
+            add (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
 
         <rule: and_op>
-            and <...>
+            and (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
+
+        <rule: bound_op>
+            bound <reg32> , <mem>
+
+        <rule: bsf_op>
+            bsf (?: <reg16> , <mem>
+                  | <reg16> , <reg16>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+            )
+
+        <rule: bsr_op>
+            bsr (?: <reg16> , <mem>
+                  | <reg16> , <reg16>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+            )
+
+        <rule: bt_op>
+            bt (?: <mem> , <reg16>
+                 | <mem> , <reg32>
+                 | <reg16> , <reg16>
+                 | <reg32> , <reg32>
+                 | <rm16> , <imm>
+                 | <rm32> , <imm>
+            )
+
+        <rule: btc_op>
+            btc (?: <mem> , <reg16>
+                  | <mem> , <reg32>
+                  | <reg16> , <reg16>
+                  | <reg32> , <reg32>
+                  | <rm16> , <imm>
+                  | <rm32> , <imm>
+            )
+
+        <rule: btr_op>
+            btr (?: <mem> , <reg16>
+                  | <mem> , <reg32>
+                  | <reg16> , <reg16>
+                  | <reg32> , <reg32>
+                  | <rm16> , <imm>
+                  | <rm32> , <imm>
+            )
+
+        <rule: bts_op>
+            bts (?: <mem> , <reg16>
+                  | <mem> , <reg32>
+                  | <reg16> , <reg16>
+                  | <reg32> , <reg32>
+                  | <rm16> , <imm>
+                  | <rm32> , <imm>
+            )
 
         <rule: call_op>
-            call <...>
+            call (?: <imm32>
+                   #| <imm32:imm>
+                   | (?: <imm32> | <far> )
+                   | (?: <imm32> | <near> )
+                   #| <imm:imm32>
+                   | <mem32>
+                   | (?: <mem32> | <far> )
+                   | (?: <mem32> | <near> )
+                   | <reg32>
+            )
 
         <rule: cdq_op>
-            cdq <...>
-
-        <rule: cli_op>
-            cli <...>
+            cdq
 
         <rule: cmp_op>
-            cmp <...>
+            cmp (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
+
+        <rule: cmpsd_op>
+            cmpsd
+
+        <rule: cwde_op>
+            cwde
 
         <rule: dec_op>
-            dec <...>
+            dec (?: <reg32>
+                  | <rm32>
+            )
 
         <rule: div_op>
-            div <...>
+            div <rm32>
 
-        <rule: fadd_op>
-            fadd <...>
+        <rule: fcos_op>
+            fcos
 
-        <rule: fcomp_op>
-            fcomp <...>
+        <rule: fprem1_op>
+            fprem1
 
-        <rule: fcompp_op>
-            fcompp <...>
+        <rule: fsin_op>
+            fsin
 
-        <rule: fdiv_op>
-            fdiv <...>
+        <rule: fsincos_op>
+            fsincos
 
-        <rule: fdivp_op>
-            fdivp <...>
+        <rule: fucom_op>
+            fucom (?: <fpu0> , <fpureg>
+                    | <fpureg>
+            )
 
-        <rule: fild_op>
-            fild <...>
+        <rule: fucomp_op>
+            fucomp (?: <fpu0> , <fpureg>
+                     | <fpureg>
+            )
 
-        <rule: fistp_op>
-            fistp <...>
+        <rule: fucompp_op>
+            fucompp
 
-        <rule: fld_op>
-            fld <...>
-
-        <rule: fldcw_op>
-            fldcw <...>
-
-        <rule: fldz_op>
-            fldz <...>
-
-        <rule: fmul_op>
-            fmul <...>
-
-        <rule: fmulp_op>
-            fmulp <...>
-
-        <rule: fnstcw_op>
-            fnstcw <...>
-
-        <rule: fnstsw_op>
-            fnstsw <...>
-
-        <rule: fprem_op>
-            fprem <...>
-
-        <rule: fstp_op>
-            fstp <...>
-
-        <rule: fsub_op>
-            fsub <...>
-
-        <rule: fsubr_op>
-            fsubr <...>
+        <rule: icebp_op>
+            icebp
 
         <rule: idiv_op>
-            idiv <...>
+            idiv <rm32>
 
         <rule: imul_op>
-            imul <...>
+            imul (?: <reg16> , <mem>
+                   | <reg16> , <reg16>
+                   | <reg32> , <imm>
+                   | <reg32> , <imm32>
+                   | <reg32> , <imm8>
+                   | <reg32> , <mem>
+                   | <reg32> , <mem> , <imm>
+                   | <reg32> , <mem> , <imm32>
+                   | <reg32> , <mem> , <imm8>
+                   | <reg32> , <mem> , <sbyte32>
+                   | <reg32> , <reg32>
+                   | <reg32> , <reg32> , <imm>
+                   | <reg32> , <reg32> , <imm32>
+                   | <reg32> , <reg32> , <imm8>
+                   | <reg32> , <reg32> , <sbyte32>
+                   | <reg32> , <sbyte32>
+                   | <rm32>
+            )
+
+        <rule: in_op>
+            in (?: <reg_eax> , <imm>
+                 | <reg_eax> , <reg_dx>
+            )
 
         <rule: inc_op>
-            inc <...>
+            inc (?: <reg32>
+                  | <rm32>
+            )
 
-        <rule: iret_op>
-            iret <...>
+        <rule: insd_op>
+            insd
 
-        <rule: ja_op>
-            ja <...>
+        <rule: int01_op>
+            int01
 
-        <rule: jc_op>
-            jc <...>
+        <rule: int1_op>
+            int1
 
-        <rule: jg_op>
-            jg <...>
+        <rule: iretd_op>
+            iretd
 
-        <rule: jge_op>
-            jge <...>
-
-        <rule: jl_op>
-            jl <...>
-
-        <rule: jle_op>
-            jle <...>
+        <rule: jecxz_op>
+            jecxz <imm>
 
         <rule: jmp_op>
-            jmp <...>
+            jmp (?: <imm32>
+                  #| <imm32:imm>
+                  | (?: <imm32> | <far> )
+                  | (?: <imm32> | <near> )
+                  #| <imm:imm32>
+                  | <mem32>
+                  | (?: <mem32> | <far> )
+                  | (?: <mem32> | <near> )
+                  | <reg32>
+            )
+
+        <rule: ja_op>
+            ja (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jae_op>
+            jae (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jb_op>
+            jb (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jbe_op>
+            jbe (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jc_op>
+            jc (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: je_op>
+            je (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jg_op>
+            jg (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jge_op>
+            jge (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jl_op>
+            jl (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jle_op>
+            jle (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
 
         <rule: jna_op>
-            jna <...>
+            jna (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jnae_op>
+            jnae (?: <imm>
+                   | (?: <imm16> | <near> )
+                   | (?: <imm32> | <near> )
+                   | (?: <imm> | <near> )
+            )
+
+        <rule: jnb_op>
+            jnb (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jnbe_op>
+            jnbe (?: <imm>
+                   | (?: <imm16> | <near> )
+                   | (?: <imm32> | <near> )
+                   | (?: <imm> | <near> )
+            )
 
         <rule: jnc_op>
-            jnc <...>
+            jnc (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jne_op>
+            jne (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
 
         <rule: jng_op>
-            jng <...>
+            jng (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jnge_op>
+            jnge (?: <imm>
+                   | (?: <imm16> | <near> )
+                   | (?: <imm32> | <near> )
+                   | (?: <imm> | <near> )
+            )
 
         <rule: jnl_op>
-            jnl <...>
+            jnl (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jnle_op>
+            jnle (?: <imm>
+                   | (?: <imm16> | <near> )
+                   | (?: <imm32> | <near> )
+                   | (?: <imm> | <near> )
+            )
+
+        <rule: jno_op>
+            jno (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jnp_op>
+            jnp (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
 
         <rule: jns_op>
-            jns <...>
+            jns (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
 
         <rule: jnz_op>
-            jnz <...>
+            jnz (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jo_op>
+            jo (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: jp_op>
+            jp (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
 
         <rule: jpe_op>
-            jpe <...>
+            jpe (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
+
+        <rule: jpo_op>
+            jpo (?: <imm>
+                  | (?: <imm16> | <near> )
+                  | (?: <imm32> | <near> )
+                  | (?: <imm> | <near> )
+            )
 
         <rule: js_op>
-            js <...>
+            js (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
 
         <rule: jz_op>
-            jz <...>
+            jz (?: <imm>
+                 | (?: <imm16> | <near> )
+                 | (?: <imm32> | <near> )
+                 | (?: <imm> | <near> )
+            )
+
+        <rule: lar_op>
+            lar (?: <reg16> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg16>
+                  | <reg32> , <reg32>
+            )
+
+        <rule: lds_op>
+            lds <reg32> , <mem>
 
         <rule: lea_op>
-            lea <...>
+            lea <reg32> , <mem>
+
+        <rule: les_op>
+            les <reg32> , <mem>
+
+        <rule: lfs_op>
+            lfs (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
+
+        <rule: lgs_op>
+            lgs (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
+
+        <rule: lodsd_op>
+            lodsd
+
+        <rule: loop_op>
+            loop <imm> , <reg_ecx>
+
+        <rule: loope_op>
+            loope <imm> , <reg_ecx>
+
+        <rule: loopne_op>
+            loopne <imm> , <reg_ecx>
+
+        <rule: loopnz_op>
+            loopnz <imm> , <reg_ecx>
+
+        <rule: loopz_op>
+            loopz <imm> , <reg_ecx>
+
+        <rule: lsl_op>
+            lsl (?: <reg16> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg16>
+                  | <reg32> , <reg32>
+            )
+
+        <rule: lss_op>
+            lss (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
 
         <rule: mov_op>
-            mov <extended_register> , <extended_register>
-
-        <rule: movsb_op>
-            movsb <...>
+            mov (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <mem_offs> , <reg_eax>
+                  | <reg32> , <imm>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg_sreg>
+                  | <reg32> , <reg_treg>
+                  | <reg_eax> , <mem_offs>
+                  | <reg_sreg> , <reg32>
+                  | <reg_treg> , <reg32>
+                  | <rm32> , <imm>
+            )
 
         <rule: movsd_op>
-            movsd <...>
-
-        <rule: movsw_op>
-            movsw <...>
+            movsd
 
         <rule: movsx_op>
-            movsx <...>
+            movsx (?: <reg16> , <mem>
+                    | <reg16> , <reg8>
+                    | <reg32> , <rm16>
+                    | <reg32> , <rm8>
+            )
 
         <rule: movzx_op>
-            movzx <...>
+            movzx (?: <reg16> , <mem>
+                    | <reg16> , <reg8>
+                    | <reg32> , <rm16>
+                    | <reg32> , <rm8>
+            )
 
         <rule: mul_op>
-            mul <...>
+            mul <rm32>
 
         <rule: neg_op>
-            neg <...>
-
-        <rule: nop_op>
-            nop <...>
+            neg <rm32>
 
         <rule: not_op>
-            not <...>
+            not <rm32>
 
         <rule: or_op>
-            or <...>
+            or (?: <mem> , <imm32>
+                 | <mem> , <reg32>
+                 | <reg32> , <mem>
+                 | <reg32> , <reg32>
+                 | <reg32> , <reg32>
+                 | <reg_eax> , <imm>
+                 | <reg_eax> , <sbyte32>
+                 | <rm32> , <imm>
+                 | <rm32> , <imm8>
+            )
+
+        <rule: out_op>
+            out (?: <imm> , <reg_eax>
+                  | <reg_dx> , <reg_eax>
+            )
+
+        <rule: outsd_op>
+            outsd
 
         <rule: pop_op>
-            pop <...>
+            pop (?: <reg32>
+                  | <reg_fsgs>
+                  | <rm32>
+            )
+
+        <rule: popad_op>
+            popad
+
+        <rule: popfd_op>
+            popfd
 
         <rule: push_op>
-            push (?: <extended_register> )
+            push (?: <imm32>
+                   | <imm32>
+                   | <reg32>
+                   | <reg_fsgs>
+                   | <rm32>
+            )
 
-        <rule: pushf_op>
-            pushf <...>
+        <rule: pushad_op>
+            pushad
+
+        <rule: pushfd_op>
+            pushfd
 
         <rule: rcl_op>
-            rcl <...>
+            rcl (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
-        <rule: rep_op>
-            rep <...>
+        <rule: rcr_op>
+            rcr (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
-        <rule: repne_op>
-            repne <...>
+        <rule: rol_op>
+            rol (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
-        <rule: ret_op>
-            ret <...>
+        <rule: ror_op>
+            ror (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
-        <rule: sahf_op>
-            sahf <...>
+        <rule: sal_op>
+            sal (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
         <rule: sar_op>
-            sar <...>
+            sar (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
 
         <rule: sbb_op>
-            sbb <...>
+            sbb (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
+
+        <rule: scasd_op>
+            scasd
 
         <rule: seta_op>
-            seta <...>
+            seta (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setae_op>
+            setae (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setb_op>
+            setb (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setbe_op>
+            setbe (?: <mem>
+                    | <reg8>
+            )
 
         <rule: setc_op>
-            setc <...>
+            setc (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: sete_op>
+            sete (?: <mem>
+                   | <reg8>
+            )
 
         <rule: setg_op>
-            setg <...>
+            setg (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setge_op>
+            setge (?: <mem>
+                    | <reg8>
+            )
 
         <rule: setl_op>
-            setl <...>
+            setl (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setle_op>
+            setle (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setna_op>
+            setna (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setnae_op>
+            setnae (?: <mem>
+                     | <reg8>
+            )
+
+        <rule: setnb_op>
+            setnb (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setnbe_op>
+            setnbe (?: <mem>
+                     | <reg8>
+            )
 
         <rule: setnc_op>
-            setnc <...>
+            setnc (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setne_op>
+            setne (?: <mem>
+                    | <reg8>
+            )
 
         <rule: setng_op>
-            setng <...>
+            setng (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setnge_op>
+            setnge (?: <mem>
+                     | <reg8>
+            )
 
         <rule: setnl_op>
-            setnl <...>
+            setnl (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setnle_op>
+            setnle (?: <mem>
+                     | <reg8>
+            )
+
+        <rule: setno_op>
+            setno (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setnp_op>
+            setnp (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setns_op>
+            setns (?: <mem>
+                    | <reg8>
+            )
 
         <rule: setnz_op>
-            setnz <...>
+            setnz (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: seto_op>
+            seto (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setp_op>
+            setp (?: <mem>
+                   | <reg8>
+            )
+
+        <rule: setpe_op>
+            setpe (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: setpo_op>
+            setpo (?: <mem>
+                    | <reg8>
+            )
+
+        <rule: sets_op>
+            sets (?: <mem>
+                   | <reg8>
+            )
 
         <rule: setz_op>
-            setz <...>
+            setz (?: <mem>
+                   | <reg8>
+            )
 
         <rule: shl_op>
-            shl <...>
+            shl (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
+
+        <rule: shld_op>
+            shld (?: <mem> , <reg16> , <imm>
+                   | <mem> , <reg16> , <reg_cl>
+                   | <mem> , <reg32> , <imm>
+                   | <mem> , <reg32> , <reg_cl>
+                   | <reg16> , <reg16> , <imm>
+                   | <reg16> , <reg16> , <reg_cl>
+                   | <reg32> , <reg32> , <imm>
+                   | <reg32> , <reg32> , <reg_cl>
+            )
 
         <rule: shr_op>
-            shr <...>
+            shr (?: <rm32> , <imm>
+                  | <rm32> , <reg_cl>
+                  | <rm32> , <unity>
+            )
+
+        <rule: shrd_op>
+            shrd (?: <mem> , <reg16> , <imm>
+                   | <mem> , <reg16> , <reg_cl>
+                   | <mem> , <reg32> , <imm>
+                   | <mem> , <reg32> , <reg_cl>
+                   | <reg16> , <reg16> , <imm>
+                   | <reg16> , <reg16> , <reg_cl>
+                   | <reg32> , <reg32> , <imm>
+                   | <reg32> , <reg32> , <reg_cl>
+            )
+
+        <rule: sldt_op>
+            sldt <reg32>
+
+        <rule: smsw_op>
+            smsw <reg32>
+
+        <rule: stosd_op>
+            stosd
+
+        <rule: str_op>
+            str <reg32>
 
         <rule: sub_op>
-            sub <...>
+            sub (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
 
         <rule: test_op>
-            test <...>
-
-        <rule: times_op>
-            times <...>
-
-        <rule: wait_op>
-            wait <...>
+            test (?: <mem> , <imm32>
+                   | <mem> , <reg32>
+                   | <reg32> , <mem>
+                   | <reg32> , <reg32>
+                   | <reg_eax> , <imm>
+                   | <rm32> , <imm>
+            )
 
         <rule: xchg_op>
-            xchg <...>
+            xchg (?: <mem> , <reg32>
+                   | <reg32> , <mem>
+                   | <reg32> , <reg32>
+                   | <reg32> , <reg32>
+                   | <reg32na> , <reg_eax>
+                   | <reg_eax> , <reg32na>
+                   | <reg_eax> , <reg_eax>
+            )
 
         <rule: xor_op>
-            xor <...>
+            xor (?: <mem> , <imm32>
+                  | <mem> , <reg32>
+                  | <reg32> , <mem>
+                  | <reg32> , <reg32>
+                  | <reg32> , <reg32>
+                  | <reg_eax> , <imm>
+                  | <reg_eax> , <sbyte32>
+                  | <rm32> , <imm>
+                  | <rm32> , <imm8>
+            )
+
+        <rule: mem>
+            <...>
+
+        <rule: mem32>
+            <...>
+
+        <rule: mem_offs>
+            <...>
+
+        <rule: imm>
+            <...>
+
+        <rule: imm8>
+            <...>
+
+        <rule: imm16>
+            <...>
+
+        <rule: imm32>
+            <...>
+
+        <rule: sbyte32>
+            <...>
+
+        <rule: unity>
+            <...>
+
+        <rule: reg8>
+            <...>
+
+        <rule: reg16>
+            <...>
+
+        <rule: reg32>
+            <...>
+
+        <rule: reg32na>
+            <...>
+
+        <rule: reg_cl>
+            <...>
+
+        <rule: reg_dx>
+            <...>
+
+        <rule: reg_eax>
+            <...>
+
+        <rule: reg_ecx>
+            <...>
+
+        <rule: reg_sreg>
+            <...>
+
+        <rule: reg_treg>
+            <...>
+
+        <rule: reg_fsgs>
+            <...>
+
+        <rule: fpureg>
+            <...>
+
+        <rule: fpu0>
+            <...>
+
+        <rule: rm8>
+            <...>
+
+        <rule: rm16>
+            <...>
+
+        <rule: rm32>
+            <...>
+
+        <rule: far>
+            <...>
+
+        <rule: near>
+            <...>
 
         <rule: extended_register>
             (?: eax | ebx | ecx | edx | ebp | esp )
