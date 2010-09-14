@@ -1120,7 +1120,7 @@ my $parser = do {
             <...>
 
         <rule: reg32>
-            <...>
+            (?: eax | ebx | ecx | edx | ebp | esp )
 
         <rule: reg32na>
             <...>
@@ -1166,9 +1166,6 @@ my $parser = do {
 
         <rule: near>
             <...>
-
-        <rule: extended_register>
-            (?: eax | ebx | ecx | edx | ebp | esp )
     }x;
 };
 
