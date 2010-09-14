@@ -48,18 +48,19 @@ for my $op (sort keys %ops) {
         next if $args eq "void";
         my @args = split ',', $args;
 
-        my @alt_args;
+        my @fixed_args;
 
         for my $arg (@args) {
             if ($arg =~ m/\|/) {
                 my @alt = split /\|/, $arg;
-                $arg = "(?: <".join("> | <", @alt)."> )";
+                push @fixed_args, "(?: <".join("> | <", @alt)."> )";
             }
-
-            push @alt_args, $arg;
+            else {
+                push @fixed_args, "<$arg>";
+            }
         }
 
-        push @argrules, '<'.join('> , <', @alt_args).'>';
+        push @argrules, join ' , ', @fixed_args
     }
 
     given (scalar @argrules) {
