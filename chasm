@@ -2059,7 +2059,7 @@ my $parser = do {
             <...>
 
         <rule: imm>
-            <.byte=(?:byte)>? <number>
+            (?: <.byte=(?:byte)>? <number> | <label> )
 
         <rule: imm8>
             <...>
