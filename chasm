@@ -75,11 +75,15 @@ my $parser = do {
         <rule: comment>
             ; [^\n]*
 
-
         <rule: op>
-            (?: <adc_op>
+            (?: <aaa_op>
+              | <aad_op>
+              | <aam_op>
+              | <aas_op>
+              | <adc_op>
               | <add_op>
               | <and_op>
+              | <arpl_op>
               | <bound_op>
               | <bsf_op>
               | <bsr_op>
@@ -88,28 +92,124 @@ my $parser = do {
               | <btr_op>
               | <bts_op>
               | <call_op>
+              | <cbw_op>
               | <cdq_op>
+              | <clc_op>
+              | <cld_op>
+              | <cli_op>
+              | <cmc_op>
               | <cmp_op>
+              | <cmpsb_op>
               | <cmpsd_op>
+              | <cmpsw_op>
+              | <cwd_op>
               | <cwde_op>
+              | <daa_op>
+              | <das_op>
               | <dec_op>
               | <div_op>
+              | <equ_op>
+              | <f2xm1_op>
+              | <fabs_op>
+              | <fadd_op>
+              | <faddp_op>
+              | <fbld_op>
+              | <fbstp_op>
+              | <fchs_op>
+              | <fclex_op>
+              | <fcom_op>
+              | <fcomp_op>
+              | <fcompp_op>
               | <fcos_op>
+              | <fdecstp_op>
+              | <fdisi_op>
+              | <fdiv_op>
+              | <fdivp_op>
+              | <fdivr_op>
+              | <fdivrp_op>
+              | <feni_op>
+              | <ffree_op>
+              | <fiadd_op>
+              | <ficom_op>
+              | <ficomp_op>
+              | <fidiv_op>
+              | <fidivr_op>
+              | <fild_op>
+              | <fimul_op>
+              | <fincstp_op>
+              | <finit_op>
+              | <fist_op>
+              | <fistp_op>
+              | <fisub_op>
+              | <fisubr_op>
+              | <fld_op>
+              | <fld1_op>
+              | <fldcw_op>
+              | <fldenv_op>
+              | <fldl2e_op>
+              | <fldl2t_op>
+              | <fldlg2_op>
+              | <fldln2_op>
+              | <fldpi_op>
+              | <fldz_op>
+              | <fmul_op>
+              | <fmulp_op>
+              | <fnclex_op>
+              | <fndisi_op>
+              | <fneni_op>
+              | <fninit_op>
+              | <fnop_op>
+              | <fnsave_op>
+              | <fnstcw_op>
+              | <fnstenv_op>
+              | <fnstsw_op>
+              | <fpatan_op>
+              | <fprem_op>
               | <fprem1_op>
+              | <fptan_op>
+              | <frndint_op>
+              | <frstor_op>
+              | <fsave_op>
+              | <fscale_op>
+              | <fsetpm_op>
               | <fsin_op>
               | <fsincos_op>
+              | <fsqrt_op>
+              | <fst_op>
+              | <fstcw_op>
+              | <fstenv_op>
+              | <fstp_op>
+              | <fstsw_op>
+              | <fsub_op>
+              | <fsubp_op>
+              | <fsubr_op>
+              | <fsubrp_op>
+              | <ftst_op>
               | <fucom_op>
               | <fucomp_op>
               | <fucompp_op>
+              | <fwait_op>
+              | <fxam_op>
+              | <fxch_op>
+              | <fxtract_op>
+              | <fyl2x_op>
+              | <fyl2xp1_op>
               | <icebp_op>
               | <idiv_op>
               | <imul_op>
               | <in_op>
               | <inc_op>
               | <insd_op>
+              | <int_op>
               | <int01_op>
+              | <int03_op>
               | <int1_op>
+              | <int3_op>
+              | <into_op>
+              | <iret_op>
               | <iretd_op>
+              | <iretw_op>
+              | <jcxz_op>
               | <jecxz_op>
               | <jmp_op>
               | <ja_op>
@@ -142,13 +242,16 @@ my $parser = do {
               | <jpo_op>
               | <js_op>
               | <jz_op>
+              | <lahf_op>
               | <lar_op>
               | <lds_op>
               | <lea_op>
               | <les_op>
               | <lfs_op>
               | <lgs_op>
+              | <lodsb_op>
               | <lodsd_op>
+              | <lodsw_op>
               | <loop_op>
               | <loope_op>
               | <loopne_op>
@@ -157,29 +260,44 @@ my $parser = do {
               | <lsl_op>
               | <lss_op>
               | <mov_op>
+              | <movsb_op>
               | <movsd_op>
+              | <movsw_op>
               | <movsx_op>
               | <movzx_op>
               | <mul_op>
               | <neg_op>
+              | <nop_op>
               | <not_op>
               | <or_op>
               | <out_op>
               | <outsd_op>
+              | <pause_op>
               | <pop_op>
               | <popad_op>
+              | <popf_op>
               | <popfd_op>
+              | <popfw_op>
               | <push_op>
               | <pushad_op>
+              | <pushf_op>
               | <pushfd_op>
+              | <pushfw_op>
               | <rcl_op>
               | <rcr_op>
+              | <resb_op>
+              | <ret_op>
+              | <retf_op>
+              | <retn_op>
               | <rol_op>
               | <ror_op>
+              | <sahf_op>
               | <sal_op>
               | <sar_op>
               | <sbb_op>
+              | <scasb_op>
               | <scasd_op>
+              | <scasw_op>
               | <seta_op>
               | <setae_op>
               | <setb_op>
@@ -210,54 +328,121 @@ my $parser = do {
               | <setpo_op>
               | <sets_op>
               | <setz_op>
+              | <sgdt_op>
               | <shl_op>
               | <shld_op>
               | <shr_op>
               | <shrd_op>
+              | <sidt_op>
               | <sldt_op>
               | <smsw_op>
+              | <stc_op>
+              | <std_op>
+              | <sti_op>
+              | <stosb_op>
               | <stosd_op>
+              | <stosw_op>
               | <str_op>
               | <sub_op>
               | <test_op>
+              | <verr_op>
+              | <verw_op>
               | <xchg_op>
+              | <xlat_op>
+              | <xlatb_op>
               | <xor_op>
             )
 
+        <rule: aaa_op>
+            aaa
+
+        <rule: aad_op>
+            aad <imm>
+
+        <rule: aam_op>
+            aam <imm>
+
+        <rule: aas_op>
+            aas
+
         <rule: adc_op>
-            adc (?: <mem> , <imm32>
+            adc (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
 
         <rule: add_op>
-            add (?: <mem> , <imm32>
+            add (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
 
         <rule: and_op>
-            and (?: <mem> , <imm32>
+            and (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
+            )
+
+        <rule: arpl_op>
+            arpl (?: <mem> , <reg16>
+                   | <reg16> , <reg16>
             )
 
         <rule: bound_op>
@@ -314,57 +499,442 @@ my $parser = do {
             )
 
         <rule: call_op>
-            call (?: <imm32>
+            call (?: <imm>
+                   | <imm16>
+                   #| <imm16:imm>
+                   | (?: <imm16> | <far> )
+                   | (?: <imm16> | <near> )
+                   | <imm32>
                    #| <imm32:imm>
                    | (?: <imm32> | <far> )
                    | (?: <imm32> | <near> )
+                   #| <imm:imm>
+                   #| <imm:imm16>
                    #| <imm:imm32>
+                   | (?: <imm> | <far> )
+                   | (?: <imm> | <near> )
+                   | <mem>
+                   | <mem16>
+                   | (?: <mem16> | <far> )
+                   | (?: <mem16> | <near> )
                    | <mem32>
                    | (?: <mem32> | <far> )
                    | (?: <mem32> | <near> )
+                   | (?: <mem> | <far> )
+                   | (?: <mem> | <near> )
+                   | <reg16>
                    | <reg32>
             )
+
+        <rule: cbw_op>
+            cbw
 
         <rule: cdq_op>
             cdq
 
+        <rule: clc_op>
+            clc
+
+        <rule: cld_op>
+            cld
+
+        <rule: cli_op>
+            cli
+
+        <rule: cmc_op>
+            cmc
+
         <rule: cmp_op>
-            cmp (?: <mem> , <imm32>
+            cmp (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
+
+        <rule: cmpsb_op>
+            cmpsb
 
         <rule: cmpsd_op>
             cmpsd
 
+        <rule: cmpsw_op>
+            cmpsw
+
+        <rule: cwd_op>
+            cwd
+
         <rule: cwde_op>
             cwde
 
+        <rule: daa_op>
+            daa
+
+        <rule: das_op>
+            das
+
         <rule: dec_op>
-            dec (?: <reg32>
+            dec (?: <reg16>
+                  | <reg32>
+                  | <rm16>
                   | <rm32>
+                  | <rm8>
             )
 
         <rule: div_op>
-            div <rm32>
+            div (?: <rm16>
+                  | <rm32>
+                  | <rm8>
+            )
+
+        <rule: equ_op>
+            equ (?: <imm>
+                  #| <imm:imm>
+            )
+
+        <rule: f2xm1_op>
+            f2xm1
+
+        <rule: fabs_op>
+            fabs
+
+        <rule: fadd_op>
+            fadd (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <fpureg> , <fpu0>
+                   | (?: <fpureg> | <to> )
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: faddp_op>
+            faddp (?: <fpureg>
+                    | <fpureg> , <fpu0>
+            )
+
+        <rule: fbld_op>
+            fbld (?: <mem>
+                   | <mem80>
+            )
+
+        <rule: fbstp_op>
+            fbstp (?: <mem>
+                    | <mem80>
+            )
+
+        <rule: fchs_op>
+            fchs
+
+        <rule: fclex_op>
+            fclex
+
+        <rule: fcom_op>
+            fcom (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: fcomp_op>
+            fcomp (?: <fpu0> , <fpureg>
+                    | <fpureg>
+                    | <mem32>
+                    | <mem64>
+            )
+
+        <rule: fcompp_op>
+            fcompp
 
         <rule: fcos_op>
             fcos
 
+        <rule: fdecstp_op>
+            fdecstp
+
+        <rule: fdisi_op>
+            fdisi
+
+        <rule: fdiv_op>
+            fdiv (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <fpureg> , <fpu0>
+                   | (?: <fpureg> | <to> )
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: fdivp_op>
+            fdivp (?: <fpureg>
+                    | <fpureg> , <fpu0>
+            )
+
+        <rule: fdivr_op>
+            fdivr (?: <fpu0> , <fpureg>
+                    | <fpureg>
+                    | <fpureg> , <fpu0>
+                    | (?: <fpureg> | <to> )
+                    | <mem32>
+                    | <mem64>
+            )
+
+        <rule: fdivrp_op>
+            fdivrp (?: <fpureg>
+                     | <fpureg> , <fpu0>
+            )
+
+        <rule: feni_op>
+            feni
+
+        <rule: ffree_op>
+            ffree <fpureg>
+
+        <rule: fiadd_op>
+            fiadd (?: <mem16>
+                    | <mem32>
+            )
+
+        <rule: ficom_op>
+            ficom (?: <mem16>
+                    | <mem32>
+            )
+
+        <rule: ficomp_op>
+            ficomp (?: <mem16>
+                     | <mem32>
+            )
+
+        <rule: fidiv_op>
+            fidiv (?: <mem16>
+                    | <mem32>
+            )
+
+        <rule: fidivr_op>
+            fidivr (?: <mem16>
+                     | <mem32>
+            )
+
+        <rule: fild_op>
+            fild (?: <mem16>
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: fimul_op>
+            fimul (?: <mem16>
+                    | <mem32>
+            )
+
+        <rule: fincstp_op>
+            fincstp
+
+        <rule: finit_op>
+            finit
+
+        <rule: fist_op>
+            fist (?: <mem16>
+                   | <mem32>
+            )
+
+        <rule: fistp_op>
+            fistp (?: <mem16>
+                    | <mem32>
+                    | <mem64>
+            )
+
+        <rule: fisub_op>
+            fisub (?: <mem16>
+                    | <mem32>
+            )
+
+        <rule: fisubr_op>
+            fisubr (?: <mem16>
+                     | <mem32>
+            )
+
+        <rule: fld_op>
+            fld (?: <fpureg>
+                  | <mem32>
+                  | <mem64>
+                  | <mem80>
+            )
+
+        <rule: fld1_op>
+            fld1
+
+        <rule: fldcw_op>
+            fldcw <mem>
+
+        <rule: fldenv_op>
+            fldenv <mem>
+
+        <rule: fldl2e_op>
+            fldl2e
+
+        <rule: fldl2t_op>
+            fldl2t
+
+        <rule: fldlg2_op>
+            fldlg2
+
+        <rule: fldln2_op>
+            fldln2
+
+        <rule: fldpi_op>
+            fldpi
+
+        <rule: fldz_op>
+            fldz
+
+        <rule: fmul_op>
+            fmul (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <fpureg> , <fpu0>
+                   | (?: <fpureg> | <to> )
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: fmulp_op>
+            fmulp (?: <fpureg>
+                    | <fpureg> , <fpu0>
+            )
+
+        <rule: fnclex_op>
+            fnclex
+
+        <rule: fndisi_op>
+            fndisi
+
+        <rule: fneni_op>
+            fneni
+
+        <rule: fninit_op>
+            fninit
+
+        <rule: fnop_op>
+            fnop
+
+        <rule: fnsave_op>
+            fnsave <mem>
+
+        <rule: fnstcw_op>
+            fnstcw <mem>
+
+        <rule: fnstenv_op>
+            fnstenv <mem>
+
+        <rule: fnstsw_op>
+            fnstsw (?: <mem>
+                     | <reg_ax>
+            )
+
+        <rule: fpatan_op>
+            fpatan
+
+        <rule: fprem_op>
+            fprem
+
         <rule: fprem1_op>
             fprem1
+
+        <rule: fptan_op>
+            fptan
+
+        <rule: frndint_op>
+            frndint
+
+        <rule: frstor_op>
+            frstor <mem>
+
+        <rule: fsave_op>
+            fsave <mem>
+
+        <rule: fscale_op>
+            fscale
+
+        <rule: fsetpm_op>
+            fsetpm
 
         <rule: fsin_op>
             fsin
 
         <rule: fsincos_op>
             fsincos
+
+        <rule: fsqrt_op>
+            fsqrt
+
+        <rule: fst_op>
+            fst (?: <fpureg>
+                  | <mem32>
+                  | <mem64>
+            )
+
+        <rule: fstcw_op>
+            fstcw <mem>
+
+        <rule: fstenv_op>
+            fstenv <mem>
+
+        <rule: fstp_op>
+            fstp (?: <fpureg>
+                   | <mem32>
+                   | <mem64>
+                   | <mem80>
+            )
+
+        <rule: fstsw_op>
+            fstsw (?: <mem>
+                    | <reg_ax>
+            )
+
+        <rule: fsub_op>
+            fsub (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <fpureg> , <fpu0>
+                   | (?: <fpureg> | <to> )
+                   | <mem32>
+                   | <mem64>
+            )
+
+        <rule: fsubp_op>
+            fsubp (?: <fpureg>
+                    | <fpureg> , <fpu0>
+            )
+
+        <rule: fsubr_op>
+            fsubr (?: <fpu0> , <fpureg>
+                    | <fpureg>
+                    | <fpureg> , <fpu0>
+                    | (?: <fpureg> | <to> )
+                    | <mem32>
+                    | <mem64>
+            )
+
+        <rule: fsubrp_op>
+            fsubrp (?: <fpureg>
+                     | <fpureg> , <fpu0>
+            )
+
+        <rule: ftst_op>
+            ftst
 
         <rule: fucom_op>
             fucom (?: <fpu0> , <fpureg>
@@ -379,11 +949,35 @@ my $parser = do {
         <rule: fucompp_op>
             fucompp
 
+        <rule: fwait_op>
+            fwait
+
+        <rule: fxam_op>
+            fxam
+
+        <rule: fxch_op>
+            fxch (?: <fpu0> , <fpureg>
+                   | <fpureg>
+                   | <fpureg> , <fpu0>
+            )
+
+        <rule: fxtract_op>
+            fxtract
+
+        <rule: fyl2x_op>
+            fyl2x
+
+        <rule: fyl2xp1_op>
+            fyl2xp1
+
         <rule: icebp_op>
             icebp
 
         <rule: idiv_op>
-            idiv <rm32>
+            idiv (?: <rm16>
+                   | <rm32>
+                   | <rm8>
+            )
 
         <rule: imul_op>
             imul (?: <reg16> , <mem>
@@ -402,43 +996,90 @@ my $parser = do {
                    | <reg32> , <reg32> , <imm8>
                    | <reg32> , <reg32> , <sbyte32>
                    | <reg32> , <sbyte32>
+                   | <rm16>
                    | <rm32>
+                   | <rm8>
             )
 
         <rule: in_op>
-            in (?: <reg_eax> , <imm>
+            in (?: <reg_al> , <imm>
+                 | <reg_al> , <reg_dx>
+                 | <reg_ax> , <imm>
+                 | <reg_ax> , <reg_dx>
+                 | <reg_eax> , <imm>
                  | <reg_eax> , <reg_dx>
             )
 
         <rule: inc_op>
-            inc (?: <reg32>
+            inc (?: <reg16>
+                  | <reg32>
+                  | <rm16>
                   | <rm32>
+                  | <rm8>
             )
 
         <rule: insd_op>
             insd
 
+        <rule: int_op>
+            int <imm>
+
         <rule: int01_op>
             int01
+
+        <rule: int03_op>
+            int03
 
         <rule: int1_op>
             int1
 
+        <rule: int3_op>
+            int3
+
+        <rule: into_op>
+            into
+
+        <rule: iret_op>
+            iret
+
         <rule: iretd_op>
             iretd
+
+        <rule: iretw_op>
+            iretw
+
+        <rule: jcxz_op>
+            jcxz <imm>
 
         <rule: jecxz_op>
             jecxz <imm>
 
         <rule: jmp_op>
-            jmp (?: <imm32>
+            jmp (?: <imm>
+                  | <imm16>
+                  #| <imm16:imm>
+                  | (?: <imm16> | <far> )
+                  | (?: <imm16> | <near> )
+                  | <imm32>
                   #| <imm32:imm>
                   | (?: <imm32> | <far> )
                   | (?: <imm32> | <near> )
+                  #| <imm:imm>
+                  #| <imm:imm16>
                   #| <imm:imm32>
+                  | (?: <imm> | <far> )
+                  | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
+                  | <mem>
+                  | <mem16>
+                  | (?: <mem16> | <far> )
+                  | (?: <mem16> | <near> )
                   | <mem32>
                   | (?: <mem32> | <far> )
                   | (?: <mem32> | <near> )
+                  | (?: <mem> | <far> )
+                  | (?: <mem> | <near> )
+                  | <reg16>
                   | <reg32>
             )
 
@@ -447,6 +1088,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jae_op>
@@ -454,6 +1096,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jb_op>
@@ -461,6 +1104,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jbe_op>
@@ -468,6 +1112,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jc_op>
@@ -475,6 +1120,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: je_op>
@@ -482,6 +1128,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jg_op>
@@ -489,6 +1136,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jge_op>
@@ -496,6 +1144,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jl_op>
@@ -503,6 +1152,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jle_op>
@@ -510,6 +1160,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jna_op>
@@ -517,6 +1168,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnae_op>
@@ -524,6 +1176,7 @@ my $parser = do {
                    | (?: <imm16> | <near> )
                    | (?: <imm32> | <near> )
                    | (?: <imm> | <near> )
+                   | (?: <imm> | <short> )
             )
 
         <rule: jnb_op>
@@ -531,6 +1184,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnbe_op>
@@ -538,6 +1192,7 @@ my $parser = do {
                    | (?: <imm16> | <near> )
                    | (?: <imm32> | <near> )
                    | (?: <imm> | <near> )
+                   | (?: <imm> | <short> )
             )
 
         <rule: jnc_op>
@@ -545,6 +1200,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jne_op>
@@ -552,6 +1208,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jng_op>
@@ -559,6 +1216,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnge_op>
@@ -566,6 +1224,7 @@ my $parser = do {
                    | (?: <imm16> | <near> )
                    | (?: <imm32> | <near> )
                    | (?: <imm> | <near> )
+                   | (?: <imm> | <short> )
             )
 
         <rule: jnl_op>
@@ -573,6 +1232,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnle_op>
@@ -580,6 +1240,7 @@ my $parser = do {
                    | (?: <imm16> | <near> )
                    | (?: <imm32> | <near> )
                    | (?: <imm> | <near> )
+                   | (?: <imm> | <short> )
             )
 
         <rule: jno_op>
@@ -587,6 +1248,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnp_op>
@@ -594,6 +1256,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jns_op>
@@ -601,6 +1264,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jnz_op>
@@ -608,6 +1272,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jo_op>
@@ -615,6 +1280,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jp_op>
@@ -622,6 +1288,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jpe_op>
@@ -629,6 +1296,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: jpo_op>
@@ -636,6 +1304,7 @@ my $parser = do {
                   | (?: <imm16> | <near> )
                   | (?: <imm32> | <near> )
                   | (?: <imm> | <near> )
+                  | (?: <imm> | <short> )
             )
 
         <rule: js_op>
@@ -643,6 +1312,7 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
         <rule: jz_op>
@@ -650,23 +1320,35 @@ my $parser = do {
                  | (?: <imm16> | <near> )
                  | (?: <imm32> | <near> )
                  | (?: <imm> | <near> )
+                 | (?: <imm> | <short> )
             )
 
+        <rule: lahf_op>
+            lahf
+
         <rule: lar_op>
-            lar (?: <reg16> , <reg32>
+            lar (?: <reg16> , <mem>
+                  | <reg16> , <reg16>
+                  | <reg16> , <reg32>
                   | <reg32> , <mem>
                   | <reg32> , <reg16>
                   | <reg32> , <reg32>
             )
 
         <rule: lds_op>
-            lds <reg32> , <mem>
+            lds (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
 
         <rule: lea_op>
-            lea <reg32> , <mem>
+            lea (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
 
         <rule: les_op>
-            les <reg32> , <mem>
+            les (?: <reg16> , <mem>
+                  | <reg32> , <mem>
+            )
 
         <rule: lfs_op>
             lfs (?: <reg16> , <mem>
@@ -678,26 +1360,49 @@ my $parser = do {
                   | <reg32> , <mem>
             )
 
+        <rule: lodsb_op>
+            lodsb
+
         <rule: lodsd_op>
             lodsd
 
+        <rule: lodsw_op>
+            lodsw
+
         <rule: loop_op>
-            loop <imm> , <reg_ecx>
+            loop (?: <imm>
+                   | <imm> , <reg_cx>
+                   | <imm> , <reg_ecx>
+            )
 
         <rule: loope_op>
-            loope <imm> , <reg_ecx>
+            loope (?: <imm>
+                    | <imm> , <reg_cx>
+                    | <imm> , <reg_ecx>
+            )
 
         <rule: loopne_op>
-            loopne <imm> , <reg_ecx>
+            loopne (?: <imm>
+                     | <imm> , <reg_cx>
+                     | <imm> , <reg_ecx>
+            )
 
         <rule: loopnz_op>
-            loopnz <imm> , <reg_ecx>
+            loopnz (?: <imm>
+                     | <imm> , <reg_cx>
+                     | <imm> , <reg_ecx>
+            )
 
         <rule: loopz_op>
-            loopz <imm> , <reg_ecx>
+            loopz (?: <imm>
+                    | <imm> , <reg_cx>
+                    | <imm> , <reg_ecx>
+            )
 
         <rule: lsl_op>
-            lsl (?: <reg16> , <reg32>
+            lsl (?: <reg16> , <mem>
+                  | <reg16> , <reg16>
+                  | <reg16> , <reg32>
                   | <reg32> , <mem>
                   | <reg32> , <reg16>
                   | <reg32> , <reg32>
@@ -709,23 +1414,48 @@ my $parser = do {
             )
 
         <rule: mov_op>
-            mov (?: <mem> , <imm32>
+            mov (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <mem> , <reg_sreg>
+                  | <mem_offs> , <reg_al>
+                  | <mem_offs> , <reg_ax>
                   | <mem_offs> , <reg_eax>
+                  | <reg16> , <imm>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
+                  | <reg16> , <reg_sreg>
                   | <reg32> , <imm>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
                   | <reg32> , <reg_sreg>
                   | <reg32> , <reg_treg>
+                  | <reg8> , <imm>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <mem_offs>
+                  | <reg_ax> , <mem_offs>
                   | <reg_eax> , <mem_offs>
+                  | <reg_sreg> , <mem>
+                  | <reg_sreg> , <reg16>
                   | <reg_sreg> , <reg32>
                   | <reg_treg> , <reg32>
+                  | <rm16> , <imm>
                   | <rm32> , <imm>
+                  | <rm8> , <imm>
             )
+
+        <rule: movsb_op>
+            movsb
 
         <rule: movsd_op>
             movsd
+
+        <rule: movsw_op>
+            movsw
 
         <rule: movsx_op>
             movsx (?: <reg16> , <mem>
@@ -742,110 +1472,218 @@ my $parser = do {
             )
 
         <rule: mul_op>
-            mul <rm32>
+            mul (?: <rm16>
+                  | <rm32>
+                  | <rm8>
+            )
 
         <rule: neg_op>
-            neg <rm32>
+            neg (?: <rm16>
+                  | <rm32>
+                  | <rm8>
+            )
+
+        <rule: nop_op>
+            nop
 
         <rule: not_op>
-            not <rm32>
+            not (?: <rm16>
+                  | <rm32>
+                  | <rm8>
+            )
 
         <rule: or_op>
-            or (?: <mem> , <imm32>
+            or (?: <mem> , <imm16>
+                 | <mem> , <imm32>
+                 | <mem> , <imm8>
+                 | <mem> , <reg16>
                  | <mem> , <reg32>
+                 | <mem> , <reg8>
+                 | <reg16> , <mem>
+                 | <reg16> , <reg16>
                  | <reg32> , <mem>
                  | <reg32> , <reg32>
-                 | <reg32> , <reg32>
+                 | <reg8> , <mem>
+                 | <reg8> , <reg8>
+                 | <reg_al> , <imm>
+                 | <reg_ax> , <imm>
+                 | <reg_ax> , <sbyte16>
                  | <reg_eax> , <imm>
                  | <reg_eax> , <sbyte32>
+                 | <rm16> , <imm>
+                 | <rm16> , <imm8>
                  | <rm32> , <imm>
                  | <rm32> , <imm8>
+                 | <rm8> , <imm>
             )
 
         <rule: out_op>
-            out (?: <imm> , <reg_eax>
+            out (?: <imm> , <reg_al>
+                  | <imm> , <reg_ax>
+                  | <imm> , <reg_eax>
+                  | <reg_dx> , <reg_al>
+                  | <reg_dx> , <reg_ax>
                   | <reg_dx> , <reg_eax>
             )
 
         <rule: outsd_op>
             outsd
 
+        <rule: pause_op>
+            pause
+
         <rule: pop_op>
-            pop (?: <reg32>
+            pop (?: <reg16>
+                  | <reg32>
+                  | <reg_dess>
                   | <reg_fsgs>
+                  | <rm16>
                   | <rm32>
             )
 
         <rule: popad_op>
             popad
 
+        <rule: popf_op>
+            popf
+
         <rule: popfd_op>
             popfd
 
+        <rule: popfw_op>
+            popfw
+
         <rule: push_op>
             push (?: <imm32>
-                   | <imm32>
+                   | <reg16>
                    | <reg32>
+                   | <reg_cs>
+                   | <reg_dess>
                    | <reg_fsgs>
+                   | <rm16>
                    | <rm32>
             )
 
         <rule: pushad_op>
             pushad
 
+        <rule: pushf_op>
+            pushf
+
         <rule: pushfd_op>
             pushfd
 
+        <rule: pushfw_op>
+            pushfw
+
         <rule: rcl_op>
-            rcl (?: <rm32> , <imm>
+            rcl (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: rcr_op>
-            rcr (?: <rm32> , <imm>
+            rcr (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
+        <rule: resb_op>
+            resb <imm>
+
+        <rule: ret_op>
+            ret <imm>
+
+        <rule: retf_op>
+            retf <imm>
+
+        <rule: retn_op>
+            retn <imm>
+
         <rule: rol_op>
-            rol (?: <rm32> , <imm>
+            rol (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: ror_op>
-            ror (?: <rm32> , <imm>
+            ror (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
+        <rule: sahf_op>
+            sahf
+
         <rule: sal_op>
-            sal (?: <rm32> , <imm>
+            sal (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: sar_op>
-            sar (?: <rm32> , <imm>
+            sar (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: sbb_op>
-            sbb (?: <mem> , <imm32>
+            sbb (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
+
+        <rule: scasb_op>
+            scasb
 
         <rule: scasd_op>
             scasd
+
+        <rule: scasw_op>
+            scasw
 
         <rule: seta_op>
             seta (?: <mem>
@@ -997,10 +1835,17 @@ my $parser = do {
                    | <reg8>
             )
 
+        <rule: sgdt_op>
+            sgdt <mem>
+
         <rule: shl_op>
-            shl (?: <rm32> , <imm>
+            shl (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: shld_op>
@@ -1015,9 +1860,13 @@ my $parser = do {
             )
 
         <rule: shr_op>
-            shr (?: <rm32> , <imm>
+            shr (?: <rm16> , <reg_cl>
+                  | <rm16> , <unity>
+                  | <rm32> , <imm>
                   | <rm32> , <reg_cl>
                   | <rm32> , <unity>
+                  | <rm8> , <reg_cl>
+                  | <rm8> , <unity>
             )
 
         <rule: shrd_op>
@@ -1031,59 +1880,152 @@ my $parser = do {
                    | <reg32> , <reg32> , <reg_cl>
             )
 
+        <rule: sidt_op>
+            sidt <mem>
+
         <rule: sldt_op>
-            sldt <reg32>
+            sldt (?: <mem>
+                   | <mem16>
+                   | <reg16>
+                   | <reg32>
+            )
 
         <rule: smsw_op>
-            smsw <reg32>
+            smsw (?: <mem>
+                   | <mem16>
+                   | <reg16>
+                   | <reg32>
+            )
+
+        <rule: stc_op>
+            stc
+
+        <rule: std_op>
+            std
+
+        <rule: sti_op>
+            sti
+
+        <rule: stosb_op>
+            stosb
 
         <rule: stosd_op>
             stosd
 
+        <rule: stosw_op>
+            stosw
+
         <rule: str_op>
-            str <reg32>
+            str (?: <mem>
+                  | <mem16>
+                  | <reg16>
+                  | <reg32>
+            )
 
         <rule: sub_op>
-            sub (?: <mem> , <imm32>
+            sub (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
 
         <rule: test_op>
-            test (?: <mem> , <imm32>
+            test (?: <mem> , <imm16>
+                   | <mem> , <imm32>
+                   | <mem> , <imm8>
+                   | <mem> , <reg16>
                    | <mem> , <reg32>
+                   | <mem> , <reg8>
+                   | <reg16> , <mem>
+                   | <reg16> , <reg16>
                    | <reg32> , <mem>
                    | <reg32> , <reg32>
+                   | <reg8> , <mem>
+                   | <reg8> , <reg8>
+                   | <reg_al> , <imm>
+                   | <reg_ax> , <imm>
                    | <reg_eax> , <imm>
+                   | <rm16> , <imm>
                    | <rm32> , <imm>
+                   | <rm8> , <imm>
+            )
+
+        <rule: verr_op>
+            verr (?: <mem>
+                   | <mem16>
+                   | <reg16>
+            )
+
+        <rule: verw_op>
+            verw (?: <mem>
+                   | <mem16>
+                   | <reg16>
             )
 
         <rule: xchg_op>
-            xchg (?: <mem> , <reg32>
+            xchg (?: <mem> , <reg16>
+                   | <mem> , <reg32>
+                   | <mem> , <reg8>
+                   | <reg16> , <mem>
+                   | <reg16> , <reg16>
+                   | <reg16> , <reg_ax>
                    | <reg32> , <mem>
                    | <reg32> , <reg32>
-                   | <reg32> , <reg32>
                    | <reg32na> , <reg_eax>
+                   | <reg8> , <mem>
+                   | <reg8> , <reg8>
+                   | <reg_ax> , <reg16>
                    | <reg_eax> , <reg32na>
                    | <reg_eax> , <reg_eax>
             )
 
+        <rule: xlat_op>
+            xlat
+
+        <rule: xlatb_op>
+            xlatb
+
         <rule: xor_op>
-            xor (?: <mem> , <imm32>
+            xor (?: <mem> , <imm16>
+                  | <mem> , <imm32>
+                  | <mem> , <imm8>
+                  | <mem> , <reg16>
                   | <mem> , <reg32>
+                  | <mem> , <reg8>
+                  | <reg16> , <mem>
+                  | <reg16> , <reg16>
                   | <reg32> , <mem>
                   | <reg32> , <reg32>
-                  | <reg32> , <reg32>
+                  | <reg8> , <mem>
+                  | <reg8> , <reg8>
+                  | <reg_al> , <imm>
+                  | <reg_ax> , <imm>
+                  | <reg_ax> , <sbyte16>
                   | <reg_eax> , <imm>
                   | <reg_eax> , <sbyte32>
+                  | <rm16> , <imm>
+                  | <rm16> , <imm8>
                   | <rm32> , <imm>
                   | <rm32> , <imm8>
+                  | <rm8> , <imm>
             )
 
         <rule: mem>
@@ -1097,7 +2039,16 @@ my $parser = do {
         <rule: mem_operator>
             [+\-*]
 
+        <rule: mem16>
+            <...>
+
         <rule: mem32>
+            <...>
+
+        <rule: mem64>
+            <...>
+
+        <rule: mem80>
             <...>
 
         <rule: mem_offs>
@@ -1113,6 +2064,9 @@ my $parser = do {
             <...>
 
         <rule: imm32>
+            <...>
+
+        <rule: sbyte16>
             <...>
 
         <rule: sbyte32>
@@ -1133,10 +2087,22 @@ my $parser = do {
         <rule: reg32na>
             <...>
 
+        <rule: reg_al>
+            <...>
+
         <rule: reg_cl>
             <...>
 
+        <rule: reg_ax>
+            <...>
+
+        <rule: reg_cx>
+            <...>
+
         <rule: reg_dx>
+            <...>
+
+        <rule: reg_cs>
             <...>
 
         <rule: reg_eax>
@@ -1152,6 +2118,9 @@ my $parser = do {
             <...>
 
         <rule: reg_fsgs>
+            <...>
+
+        <rule: reg_dess>
             <...>
 
         <rule: fpureg>
@@ -1173,6 +2142,12 @@ my $parser = do {
             <...>
 
         <rule: near>
+            <...>
+
+        <rule: short>
+            <...>
+
+        <rule: to>
             <...>
     }x;
 };
