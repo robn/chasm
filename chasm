@@ -68,7 +68,7 @@ my $parser = do {
             (?: <number> | <label> )
 
         <rule: number>
-            (?: 0x )? \d+
+            [+\-]? (?: 0x )? \d+
 
         <rule: string>
             '[^']*'
@@ -2059,7 +2059,7 @@ my $parser = do {
             <...>
 
         <rule: imm>
-            <number>
+            <.byte=(?:byte)>? <number>
 
         <rule: imm8>
             <...>
