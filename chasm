@@ -2076,13 +2076,13 @@ my $parser = do {
             <...>
 
         <rule: reg8>
-            <...>
+            (?: al | ah | bl | bh | cl | ch | dl | dh )
 
         <rule: reg16>
-            <...>
+            (?: ax | bx | cx | dx | sp | bp | si | di )
 
         <rule: reg32>
-            (?: eax | ebx | ecx | edx | ebp | esp )
+            (?: eax | ebx | ecx | edx | esp | ebp | esi | edi )
 
         <rule: reg32na>
             <...>
