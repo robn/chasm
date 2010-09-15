@@ -13,7 +13,7 @@ my $parser = do {
     use Regexp::Grammars;
 
     qr{
-        #<debug: on>
+        <debug: on>
 
         <line>
 
@@ -1087,7 +1087,15 @@ my $parser = do {
             )
 
         <rule: mem>
-            <...>
+            \[
+            <[mem_operand]> (?: <[mem_operator]> <[mem_operand]> )*
+            \]
+        
+        <rule: mem_operand>
+            (?: <reg32> | <label> | <number> )
+
+        <rule: mem_operator>
+            [+\-*]
 
         <rule: mem32>
             <...>
@@ -1171,7 +1179,7 @@ my $parser = do {
 
 while ( my $line = <STDIN> ) {
     if ( $line =~ $parser ) {
-        #print Dumper \%/;
+        print Dumper \%/;
     }
     else {
         die "parse failed at line $.: $line";
