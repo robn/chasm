@@ -2039,6 +2039,9 @@ my $parser = do {
         <rule: mem_operator>
             [+\-*]
 
+        <rule: mem8>
+            <...>
+
         <rule: mem16>
             <...>
 
@@ -2055,7 +2058,7 @@ my $parser = do {
             <...>
 
         <rule: imm>
-            <...>
+            <number>
 
         <rule: imm8>
             <...>
@@ -2130,13 +2133,13 @@ my $parser = do {
             <...>
 
         <rule: rm8>
-            <...>
+            (?: <reg8> | <mem8> )
 
         <rule: rm16>
-            <...>
+            (?: <reg16> | <mem16> )
 
         <rule: rm32>
-            <...>
+            (?: <reg32> | <mem32> )
 
         <rule: far>
             <...>
