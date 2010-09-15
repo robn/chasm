@@ -503,26 +503,26 @@ my $parser = do {
             call (?: <imm>
                    | <imm16>
                    #| <imm16:imm>
-                   | (?: <imm16> | <far> )
-                   | (?: <imm16> | <near> )
+                   | (?: <far> <imm16> )
+                   | (?: <near> <imm16> )
                    | <imm32>
                    #| <imm32:imm>
-                   | (?: <imm32> | <far> )
-                   | (?: <imm32> | <near> )
+                   | (?: <far> <imm32> )
+                   | (?: <near> <imm32> )
                    #| <imm:imm>
                    #| <imm:imm16>
                    #| <imm:imm32>
-                   | (?: <imm> | <far> )
-                   | (?: <imm> | <near> )
+                   | (?: <far> <imm> )
+                   | (?: <near> <imm> )
                    | <mem>
                    | <mem16>
-                   | (?: <mem16> | <far> )
-                   | (?: <mem16> | <near> )
+                   | (?: <far> <mem16> )
+                   | (?: <near> <mem16> )
                    | <mem32>
-                   | (?: <mem32> | <far> )
-                   | (?: <mem32> | <near> )
-                   | (?: <mem> | <far> )
-                   | (?: <mem> | <near> )
+                   | (?: <far> <mem32> )
+                   | (?: <near> <mem32> )
+                   | (?: <far> <mem> )
+                   | (?: <near> <mem> )
                    | <reg16>
                    | <reg32>
             )
@@ -620,7 +620,7 @@ my $parser = do {
             fadd (?: <fpu0> , <fpureg>
                    | <fpureg>
                    | <fpureg> , <fpu0>
-                   | (?: <fpureg> | <to> )
+                   | (?: <to> <fpureg> )
                    | <mem32>
                    | <mem64>
             )
@@ -676,7 +676,7 @@ my $parser = do {
             fdiv (?: <fpu0> , <fpureg>
                    | <fpureg>
                    | <fpureg> , <fpu0>
-                   | (?: <fpureg> | <to> )
+                   | (?: <to> <fpureg> )
                    | <mem32>
                    | <mem64>
             )
@@ -690,7 +690,7 @@ my $parser = do {
             fdivr (?: <fpu0> , <fpureg>
                     | <fpureg>
                     | <fpureg> , <fpu0>
-                    | (?: <fpureg> | <to> )
+                    | (?: <to> <fpureg> )
                     | <mem32>
                     | <mem64>
             )
@@ -807,7 +807,7 @@ my $parser = do {
             fmul (?: <fpu0> , <fpureg>
                    | <fpureg>
                    | <fpureg> , <fpu0>
-                   | (?: <fpureg> | <to> )
+                   | (?: <to> <fpureg> )
                    | <mem32>
                    | <mem64>
             )
@@ -910,7 +910,7 @@ my $parser = do {
             fsub (?: <fpu0> , <fpureg>
                    | <fpureg>
                    | <fpureg> , <fpu0>
-                   | (?: <fpureg> | <to> )
+                   | (?: <to> <fpureg> )
                    | <mem32>
                    | <mem64>
             )
@@ -924,7 +924,7 @@ my $parser = do {
             fsubr (?: <fpu0> , <fpureg>
                     | <fpureg>
                     | <fpureg> , <fpu0>
-                    | (?: <fpureg> | <to> )
+                    | (?: <to> <fpureg> )
                     | <mem32>
                     | <mem64>
             )
@@ -1059,269 +1059,269 @@ my $parser = do {
             jmp (?: <imm>
                   | <imm16>
                   #| <imm16:imm>
-                  | (?: <imm16> | <far> )
-                  | (?: <imm16> | <near> )
+                  | (?: <far> <imm16> )
+                  | (?: <near> <imm16> )
                   | <imm32>
                   #| <imm32:imm>
-                  | (?: <imm32> | <far> )
-                  | (?: <imm32> | <near> )
+                  | (?: <far> <imm32> )
+                  | (?: <near> <imm32> )
                   #| <imm:imm>
                   #| <imm:imm16>
                   #| <imm:imm32>
-                  | (?: <imm> | <far> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <far> <imm> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
                   | <mem>
                   | <mem16>
-                  | (?: <mem16> | <far> )
-                  | (?: <mem16> | <near> )
+                  | (?: <far> <mem16> )
+                  | (?: <near> <mem16> )
                   | <mem32>
-                  | (?: <mem32> | <far> )
-                  | (?: <mem32> | <near> )
-                  | (?: <mem> | <far> )
-                  | (?: <mem> | <near> )
+                  | (?: <far> <mem32> )
+                  | (?: <near> <mem32> )
+                  | (?: <far> <mem> )
+                  | (?: <near> <mem> )
                   | <reg16>
                   | <reg32>
             )
 
         <rule: ja_op>
             ja (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jae_op>
             jae (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jb_op>
             jb (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jbe_op>
             jbe (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jc_op>
             jc (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: je_op>
             je (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jg_op>
             jg (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jge_op>
             jge (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jl_op>
             jl (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jle_op>
             jle (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jna_op>
             jna (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnae_op>
             jnae (?: <imm>
-                   | (?: <imm16> | <near> )
-                   | (?: <imm32> | <near> )
-                   | (?: <imm> | <near> )
-                   | (?: <imm> | <short> )
+                   | (?: <near> <imm16> )
+                   | (?: <near> <imm32> )
+                   | (?: <near> <imm> )
+                   | (?: <short> <imm> )
             )
 
         <rule: jnb_op>
             jnb (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnbe_op>
             jnbe (?: <imm>
-                   | (?: <imm16> | <near> )
-                   | (?: <imm32> | <near> )
-                   | (?: <imm> | <near> )
-                   | (?: <imm> | <short> )
+                   | (?: <near> <imm16> )
+                   | (?: <near> <imm32> )
+                   | (?: <near> <imm> )
+                   | (?: <short> <imm> )
             )
 
         <rule: jnc_op>
             jnc (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jne_op>
             jne (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jng_op>
             jng (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnge_op>
             jnge (?: <imm>
-                   | (?: <imm16> | <near> )
-                   | (?: <imm32> | <near> )
-                   | (?: <imm> | <near> )
-                   | (?: <imm> | <short> )
+                   | (?: <near> <imm16> )
+                   | (?: <near> <imm32> )
+                   | (?: <near> <imm> )
+                   | (?: <short> <imm> )
             )
 
         <rule: jnl_op>
             jnl (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnle_op>
             jnle (?: <imm>
-                   | (?: <imm16> | <near> )
-                   | (?: <imm32> | <near> )
-                   | (?: <imm> | <near> )
-                   | (?: <imm> | <short> )
+                   | (?: <near> <imm16> )
+                   | (?: <near> <imm32> )
+                   | (?: <near> <imm> )
+                   | (?: <short> <imm> )
             )
 
         <rule: jno_op>
             jno (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnp_op>
             jnp (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jns_op>
             jns (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jnz_op>
             jnz (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jo_op>
             jo (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jp_op>
             jp (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jpe_op>
             jpe (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: jpo_op>
             jpo (?: <imm>
-                  | (?: <imm16> | <near> )
-                  | (?: <imm32> | <near> )
-                  | (?: <imm> | <near> )
-                  | (?: <imm> | <short> )
+                  | (?: <near> <imm16> )
+                  | (?: <near> <imm32> )
+                  | (?: <near> <imm> )
+                  | (?: <short> <imm> )
             )
 
         <rule: js_op>
             js (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: jz_op>
             jz (?: <imm>
-                 | (?: <imm16> | <near> )
-                 | (?: <imm32> | <near> )
-                 | (?: <imm> | <near> )
-                 | (?: <imm> | <short> )
+                 | (?: <near> <imm16> )
+                 | (?: <near> <imm32> )
+                 | (?: <near> <imm> )
+                 | (?: <short> <imm> )
             )
 
         <rule: lahf_op>
@@ -2143,13 +2143,13 @@ my $parser = do {
             (?: <reg32> | <mem32> )
 
         <rule: far>
-            <...>
+            far
 
         <rule: near>
-            <...>
+            near
 
         <rule: short>
-            <...>
+            short
 
         <rule: to>
             <...>
