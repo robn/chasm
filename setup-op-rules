@@ -6,7 +6,7 @@ use warnings;
 use strict;
 use autodie;
 
-my @want = qw(386);
+my @want = qw(8086 286 386);
 my @nowant = qw(UNDOC PRIV AMD);
 
 my @conds = qw(a ae b be c e g ge l le na nae nb nbe nc ne ng nge nl nle no np ns nz o p pe po s z);
