@@ -6,6 +6,8 @@ use warnings;
 use strict;
 use autodie;
 
+use List::MoreUtils qw(uniq);
+
 my @want = qw(8086 286 386);
 my @nowant = qw(UNDOC PRIV AMD);
 
@@ -65,6 +67,8 @@ for my $op (sort keys %ops) {
 
         push @argrules, join ' , ', @fixed_args
     }
+
+    @argrules = uniq @argrules;
 
     given (scalar @argrules) {
         when (0) {
