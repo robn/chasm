@@ -21,6 +21,7 @@ my $parser = do {
             ^
             (?: <pp_directive>
               | <directive>
+              | (?: <data> | <op> )
               | (?: <label> :?)? (?: <data> | <op> )?
             )? <comment>?
             $
