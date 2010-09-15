@@ -2030,6 +2030,7 @@ my $parser = do {
             )
 
         <rule: mem>
+            <cast>?
             \[
             <[mem_operand]> (?: <[mem_operator]> <[mem_operand]> )*
             \]
@@ -2059,7 +2060,7 @@ my $parser = do {
             <...>
 
         <rule: imm>
-            (?: <.byte=(?:byte)>? <number> | <label> )
+            (?: <cast>? <number> | <label> )
 
         <rule: imm8>
             <...>
@@ -2153,6 +2154,9 @@ my $parser = do {
 
         <rule: to>
             <...>
+
+        <rule: cast>
+            byte
     }x;
 };
 
