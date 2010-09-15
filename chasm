@@ -2042,13 +2042,13 @@ my $parser = do {
             [+\-*]
 
         <rule: mem8>
-            <...>
+            <mem>
 
         <rule: mem16>
-            <...>
+            <mem>
 
         <rule: mem32>
-            <...>
+            <mem>
 
         <rule: mem64>
             <...>
