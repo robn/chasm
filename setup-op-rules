@@ -57,8 +57,8 @@ for my $op (sort keys %ops) {
 
         for my $arg (@args) {
             if ($arg =~ m/\|/) {
-                my @alt = split /\|/, $arg;
-                push @fixed_args, "(?: <".join("> | <", @alt)."> )";
+                my ($modifier, $arg) = reverse split /\|/, $arg;
+                push @fixed_args, "(?: <$modifier> <$arg> )";
             }
             else {
                 push @fixed_args, "<$arg>";
