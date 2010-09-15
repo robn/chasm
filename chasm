@@ -13,7 +13,7 @@ my $parser = do {
     use Regexp::Grammars;
 
     qr{
-        <debug: on>
+        #<debug: on>
 
         <line>
 
@@ -1179,7 +1179,8 @@ my $parser = do {
 
 while ( my $line = <STDIN> ) {
     if ( $line =~ $parser ) {
-        print Dumper \%/;
+        #print Dumper \%/;
+        print "$. $line";
     }
     else {
         die "parse failed at line $.: $line";
