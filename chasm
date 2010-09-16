@@ -2063,13 +2063,13 @@ my $parser = do {
             (?: <cast>? <number> | <label> )
 
         <rule: imm8>
-            <...>
+            <imm>
 
         <rule: imm16>
-            <...>
+            <imm>
 
         <rule: imm32>
-            <...>
+            <imm>
 
         <rule: sbyte16>
             <...>
