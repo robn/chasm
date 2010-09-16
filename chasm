@@ -2060,7 +2060,7 @@ my $parser = do {
             <...>
 
         <rule: imm>
-            (?: <cast>? <number> | <label> )
+            <cast>? (?: <number> | <label> )
 
         <rule: imm8>
             <imm>
