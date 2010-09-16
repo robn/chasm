@@ -2096,7 +2096,7 @@ my $parser = do {
             <...>
 
         <rule: reg_cl>
-            <...>
+            cl
 
         <rule: reg_ax>
             <...>
