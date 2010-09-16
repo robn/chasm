@@ -2156,7 +2156,7 @@ my $parser = do {
             <...>
 
         <rule: cast>
-            byte
+            (?: byte | dword )
     }x;
 };
 
