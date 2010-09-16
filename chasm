@@ -2099,7 +2099,7 @@ my $parser = do {
             cl
 
         <rule: reg_ax>
-            <...>
+            ax
 
         <rule: reg_cx>
             <...>
