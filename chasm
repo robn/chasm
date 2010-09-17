@@ -54,7 +54,7 @@ my $parser = do {
             SECTION \. (?: text | data | bss )
 
         <rule: label>
-            [a-zA-Z_]\w+
+            [\.a-zA-Z_] \w+
 
         <rule: data>
             (?: db <[data_byte]> (?: , <[data_byte]> )*
