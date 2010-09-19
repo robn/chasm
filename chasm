@@ -77,12 +77,21 @@ my $parser = do {
             ; [^\n]*
 
         <rule: op>
-            (?: <aaa_op>
+            (?: <mov_op>
+              | <push_op>
+              | <add_op>
+              | <call_op>
+              | <pop_op>
+              | <cmp_op>
+              | <lea_op>
+              | <jmp_op>
+              | <movsx_op>
+              | <jz_op>
+
               | <aad_op>
               | <aam_op>
               | <aas_op>
               | <adc_op>
-              | <add_op>
               | <and_op>
               | <arpl_op>
               | <bound_op>
@@ -92,14 +101,12 @@ my $parser = do {
               | <btc_op>
               | <btr_op>
               | <bts_op>
-              | <call_op>
               | <cbw_op>
               | <cdq_op>
               | <clc_op>
               | <cld_op>
               | <cli_op>
               | <cmc_op>
-              | <cmp_op>
               | <cmpsb_op>
               | <cmpsd_op>
               | <cmpsw_op>
@@ -212,7 +219,6 @@ my $parser = do {
               | <iretw_op>
               | <jcxz_op>
               | <jecxz_op>
-              | <jmp_op>
               | <ja_op>
               | <jae_op>
               | <jb_op>
@@ -242,11 +248,9 @@ my $parser = do {
               | <jpe_op>
               | <jpo_op>
               | <js_op>
-              | <jz_op>
               | <lahf_op>
               | <lar_op>
               | <lds_op>
-              | <lea_op>
               | <les_op>
               | <lfs_op>
               | <lgs_op>
@@ -260,11 +264,9 @@ my $parser = do {
               | <loopz_op>
               | <lsl_op>
               | <lss_op>
-              | <mov_op>
               | <movsb_op>
               | <movsd_op>
               | <movsw_op>
-              | <movsx_op>
               | <movzx_op>
               | <mul_op>
               | <neg_op>
@@ -274,12 +276,10 @@ my $parser = do {
               | <out_op>
               | <outsd_op>
               | <pause_op>
-              | <pop_op>
               | <popad_op>
               | <popf_op>
               | <popfd_op>
               | <popfw_op>
-              | <push_op>
               | <pushad_op>
               | <pushf_op>
               | <pushfd_op>
