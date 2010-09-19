@@ -87,12 +87,21 @@ my $parser = do {
               | <jmp_op>
               | <movsx_op>
               | <jz_op>
+              | <xor_op>
+              | <ret_op>
+              | <test_op>
+              | <sub_op>
+              | <jnz_op>
+              | <sar_op>
+              | <shl_op>
+              | <inc_op>
+              | <jnl_op>
+              | <and_op>
 
               | <aad_op>
               | <aam_op>
               | <aas_op>
               | <adc_op>
-              | <and_op>
               | <arpl_op>
               | <bound_op>
               | <bsf_op>
@@ -206,7 +215,6 @@ my $parser = do {
               | <idiv_op>
               | <imul_op>
               | <in_op>
-              | <inc_op>
               | <insd_op>
               | <int_op>
               | <int01_op>
@@ -237,12 +245,10 @@ my $parser = do {
               | <jne_op>
               | <jng_op>
               | <jnge_op>
-              | <jnl_op>
               | <jnle_op>
               | <jno_op>
               | <jnp_op>
               | <jns_op>
-              | <jnz_op>
               | <jo_op>
               | <jp_op>
               | <jpe_op>
@@ -287,14 +293,12 @@ my $parser = do {
               | <rcl_op>
               | <rcr_op>
               | <resb_op>
-              | <ret_op>
               | <retf_op>
               | <retn_op>
               | <rol_op>
               | <ror_op>
               | <sahf_op>
               | <sal_op>
-              | <sar_op>
               | <sbb_op>
               | <scasb_op>
               | <scasd_op>
@@ -330,7 +334,6 @@ my $parser = do {
               | <sets_op>
               | <setz_op>
               | <sgdt_op>
-              | <shl_op>
               | <shld_op>
               | <shr_op>
               | <shrd_op>
@@ -344,14 +347,11 @@ my $parser = do {
               | <stosd_op>
               | <stosw_op>
               | <str_op>
-              | <sub_op>
-              | <test_op>
               | <verr_op>
               | <verw_op>
               | <xchg_op>
               | <xlat_op>
               | <xlatb_op>
-              | <xor_op>
             )
 
         <rule: aaa_op>
