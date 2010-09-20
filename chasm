@@ -18,12 +18,13 @@ my $parser = do {
         <line>
 
         <rule: line>
-            ^
-            (?: (?: <op> | <data> )
-              | <directive>
-              | <pp_directive>
-              | (?: <label> :?)? (?: <op> | <data> )?
-            )? <comment>?
+            ^ 
+            (?: $
+              | (?: (?: <op> | <data> )
+                  | <directive>
+                  | <pp_directive>
+                  | (?: <label> :?)? (?: <op> | <data> )?
+              )? <comment>? )
             $
 
         <rule: pp_directive>
